@@ -85,7 +85,6 @@ __END__
       let idx = getRandomIndex()
       img.src = json_lists[idx][0]
     })
-
     function getRandomIndex(){
       return Math.floor(Math.random() * json_lists.length)
     }
