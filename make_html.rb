@@ -92,7 +92,7 @@ __END__
     <img id="img_aiu" src="" alt="">
     <div id="menu">
       <button id="button">button</button>
-      <input type="number" id="member_cnt" name="member_cnt" value="3" min="1" max="20">
+      <input type="number" id="member_cnt" name="member_cnt" value="15" min="1" max="20">
     </div>
   </main>
   <footer>
@@ -117,16 +117,27 @@ __END__
         }
       }
 
-      // pickup random icons
+      // pickup random icons index
       let cnt = document.getElementById('member_cnt').value
+      let idxes = []
+      while(true){
+        let idx = getRandomIndex()
+        if(idxes.includes(idx) == false){
+          idxes.push(idx)
+        }
+        if(idxes.length == cnt){
+          break
+        }
+      }
+      // console.log(idxes)
+
       for(let i = 0; i < cnt; i++){
         let icon = document.getElementsByClassName('icon')[i]
         // invisible -> visible
         icon.classList.remove('invisible')
 
         let img = document.getElementById('img_icon' + i)
-        let idx = getRandomIndex()
-        console.log(img)
+        let idx = idxes[i]
         img.src = json_lists[idx][0]
         img.alt = json_lists[idx][1]
       }
