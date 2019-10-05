@@ -56,7 +56,7 @@ __END__
     footer{
       height: 300px;
     }
-    .screen{
+    #screen{
       position: relative;
     }
     .bg{
@@ -83,7 +83,7 @@ __END__
   <header>
   </header>
   <main>
-    <div class="screen">
+    <div id="screen">
       <div class="bg"></div>
       <% lists[0..(MEMBER_MAX - 1)].each_with_index do |list, i| %>
         <div class="icon icon<%= i %> invisible"><img id="img_icon<%= i %>" src="<%= list[0] %>" alt="<%= list[1] %>"></div>
@@ -93,10 +93,12 @@ __END__
     <div id="menu">
       <button id="button">button</button>
       <input type="number" id="member_cnt" name="member_cnt" value="15" min="1" max="20">
+      <a href="" id="save" download="screenshot.png">save</a>
     </div>
   </main>
   <footer>
   </footer>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js'></script>
   <script>
     let json_lists = <%= json_lists %>
   </script>
@@ -147,6 +149,31 @@ __END__
     function getRandomIndex(){
       return Math.floor(Math.random() * json_lists.length)
     }
+
+
+    document.getElementById('save').addEventListener('click', function(){
+      /*
+      html2canvas(document.querySelector('#screen')).then(canvas => {
+        // document.body.appendChild(canvas)
+        let img_url = canvas.toDataURL()
+        document.getElementById('save').href = img_url
+      })
+      */
+        /*
+      html2canvas(document.querySelector('#screen'), {
+        onrendered: function(canvas){
+          let img_url = canvas.toDataURL()
+          document.getElementById('save').href = img_url
+        }
+      })
+        */
+      html2canvas(document.body, {
+        onrenderd: function(canvas){
+          let img_url = canvas.toDataURL('image/png')
+          document.getElementById('save').href = img_url
+        }
+      })
+    })
   </script>
 </body>
 </html>
