@@ -26,6 +26,7 @@
     h1{
       margin: 0;
       font-size: 1rem;
+      color: #343a40;
     }
     #menu{
 			display: flex;
@@ -200,7 +201,20 @@
     .invisible{
       display: none;
     }
+    #comment{
+      margin: 0;
+      text-align: right;
+    }
   </style>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-54272662-18"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-54272662-18');
+  </script>
 </head>
 <body>
   <header>
@@ -218,7 +232,6 @@
           <a href="javascript: void(0)" id="save" ><i class="far fa-save fa-2x"></i></a>
         </div>
       </div>
-
     </div>
   </header>
   <main>
@@ -267,6 +280,7 @@
       
     </div>
     <img id="img_aiu" src="" alt="">
+    <p id="comment">第3回人気闘兵キャラが対象です。 限定・衣装違いは対象外となります。</p>
   </main>
   <footer>
   </footer>
