@@ -1,8 +1,17 @@
+<%
+  title = 'ランダム編成@アイギス'
+	color_main = '#007bff'  # blue
+	color_main = '#28a745'  # green
+  color_main = '#343a40'  # dark
+	color_sub  = '#007bff'  # blue
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title></title>
+  <title><%= title %></title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet">
   <style>
     body{
       margin: 0;
@@ -12,6 +21,66 @@
       margin-bottom: 20px;
       background-color: #e9ecef;
       border-bottom: 1px solid #e9ecef;
+    }
+    .header_container{
+      width: 965px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      margin: 0 auto;
+    }
+    h1{
+      margin: 0;
+      font-size: 1rem;
+    }
+    #menu{
+			display: flex;
+			align-items: center;
+      margin-left: auto;
+    }
+    .menu_item{
+      display: flex;
+			align-items: center;
+      padding-right: 0.75rem;
+    }
+		input[type="range"] {
+			-webkit-appearance: none;
+			appearance: none;
+			background-color: #eaeaea;
+			background-color: #999;
+			height: 2px;
+			// width: 100%;
+      width: 80px;
+			border-radius: 6px;
+		}
+		input[type="range"]:focus,
+		input[type="range"]:active {
+			outline: none;
+		}
+
+		input[type="range"]::-webkit-slider-thumb {
+			-webkit-appearance: none;
+			appearance: none;
+			cursor: pointer;
+			position: relative;
+			width: 22px;
+			height: 22px;
+			display: block;
+			background-color: #07be19;
+			background-color: <%= color_main %>;
+			border-radius: 50%;
+			-webkit-border-radius: 50%;
+		}
+    #member_cnt_value{
+      width: 1rem;
+      padding-left: 0.25rem;
+    }
+    #menu i{
+      color: <%= color_main %>;
+      cursor: pointer;
+    }
+    #menu i:hover{
+      color: <%= color_sub %>;
     }
     main{
       width: 965px;
@@ -35,8 +104,8 @@
     }
     <% 0.upto(MEMBER_MAX - 1) do |i| %>
       .icon<%= i %>{
-        top:  <%= 110 + (i / 5) * 115 %>px;
-        left: <%= 303 + (i % 5) * 111 %>px;
+        top:  <%= 110 + (i / 5) * 116 %>px;
+        left: <%= 303 + (i % 5) * 112 %>px;
       }
     <% end %>
     .invisible{
@@ -46,6 +115,22 @@
 </head>
 <body>
   <header>
+    <div class="header_container">
+      <h1><%= title %></h1>
+      <div id="menu">
+        <div class="menu_item">
+          <input type="range" id="member_cnt" name="member_cnt" value="15" min="1" max="20" step="1">
+          <span id="member_cnt_value">15</span>
+        </div>
+        <div class="menu_item">
+          <i id="play" class="far fa-play-circle fa-2x"></i>
+        </div>
+        <div class="menu_item">
+          <a href="javascript: void(0)" id="save" ><i class="far fa-save fa-2x"></i></a>
+        </div>
+      </div>
+
+    </div>
   </header>
   <main>
     <div id="screen">
@@ -55,14 +140,6 @@
       <% end %>
     </div>
     <img id="img_aiu" src="" alt="">
-    <div id="menu">
-      <button id="button">button</button>
-      <input type="number" id="member_cnt" name="member_cnt" value="15" min="1" max="20">
-      <a href="javascript: void(0)" id="save" >save</a>
-    </div>
-    <div id="preview">
-      <img id="aiu" src="" alt="">
-    </div>
   </main>
   <footer>
   </footer>
@@ -71,7 +148,7 @@
     let json_lists = <%= json_lists %>
   </script>
   <script>
-    document.getElementById('button').addEventListener('click', function(){
+    document.getElementById('play').addEventListener('click', function(){
       /* for check part
       let img = document.getElementById('img_aiu')
       let idx = getRandomIndex()
@@ -138,6 +215,12 @@
           link.remove()
         }
       })
+    })
+    
+    document.getElementById('member_cnt').addEventListener('input', function(){
+      let member_cnt = document.getElementById('member_cnt').value
+      let element = document.getElementById('member_cnt_value')
+      element.innerHTML = member_cnt
     })
   </script>
 </body>
